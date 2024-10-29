@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./PhotoDetail.css";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const UNPLASH_API = import.meta.env.VITE_UNPLASH_API;
 const ACCESS_KEY = import.meta.env.VITE_UNPLASH_ACCESS_KEY;
 
 function PhotoDetail() {
@@ -14,7 +14,7 @@ function PhotoDetail() {
     const fetchPhoto = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}photos/${id}?client_id=${ACCESS_KEY}`
+          `${UNPLASH_API}photos/${id}?client_id=${ACCESS_KEY}`
         );
         const data = await response.json();
         setPhoto(data);

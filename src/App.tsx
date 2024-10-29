@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import PhotoDetail from "./PhotoDetail";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const UNPLASH_API = import.meta.env.VITE_UNPLASH_API;
 const ACCESS_KEY = import.meta.env.VITE_UNPLASH_ACCESS_KEY;
 
 function ImageCard({
@@ -38,7 +38,7 @@ function PhotoGrid() {
     setError(null);
     try {
       const response = await fetch(
-        `${BASE_URL}photos?page=${page}&client_id=${ACCESS_KEY}`
+        `${UNPLASH_API}photos?page=${page}&client_id=${ACCESS_KEY}`
       );
       if (response.status === 403) {
         setError("Access denied. Please check your API key.");
