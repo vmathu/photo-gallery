@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./PhotoDetail.css";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+const ACCESS_KEY = import.meta.env.VITE_UNPLASH_ACCESS_KEY;
+
 function PhotoDetail() {
   const { id } = useParams<{ id: string }>();
   const [photo, setPhoto] = useState<any>(null);
@@ -11,9 +14,7 @@ function PhotoDetail() {
     const fetchPhoto = async () => {
       try {
         const response = await fetch(
-          `https://api.unsplash.com/photos/${id}?client_id=${
-            import.meta.env.VITE_UNPLASH_ACCESS_KEY
-          }`
+          `${BASE_URL}photos/${id}?client_id=${ACCESS_KEY}`
         );
         const data = await response.json();
         setPhoto(data);
