@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
 import PhotoDetail from "./PhotoDetail";
 
@@ -9,16 +9,14 @@ const ACCESS_KEY = import.meta.env.VITE_UNPLASH_ACCESS_KEY;
 function ImageCard({
   src,
   alt,
-  onClick,
   author,
 }: {
   readonly src: string;
   readonly alt: string;
-  readonly onClick: () => void;
   readonly author: string;
 }) {
   return (
-    <div className="image-card" onClick={onClick}>
+    <div className="image-card">
       <img src={src} alt={alt} />
       <div>{author}</div>
     </div>
@@ -84,15 +82,13 @@ function PhotoGrid() {
       <div className="photo-grid">
         {error && <div className="error">{error}</div>}
         {photos.map((photo) => (
-          <ImageCard
-            key={photo.id}
-            src={photo.urls.thumb}
-            alt={photo.alt_description}
-            onClick={() =>
-              (window.location.href = `/photo-gallery/photo/${photo.id}`)
-            }
-            author={photo.user.name}
-          />
+          <Link key={photo.id} to={`/photo/${photo.id}`}>
+            <ImageCard
+              src={photo.urls.thumb}
+              alt={photo.alt_description}
+              author={photo.user.name}
+            />
+          </Link>
         ))}
       </div>
       {loading && <div className="loading">Loading...</div>}
