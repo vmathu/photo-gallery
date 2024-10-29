@@ -88,7 +88,9 @@ function PhotoGrid() {
             key={photo.id}
             src={photo.urls.thumb}
             alt={photo.alt_description}
-            onClick={() => (window.location.href = `/photo/${photo.id}`)}
+            onClick={() =>
+              (window.location.href = `/photo-gallery/photo/${photo.id}`)
+            }
             author={photo.user.name}
           />
         ))}
@@ -103,7 +105,7 @@ function PhotoGrid() {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/photo-gallery">
       <Routes>
         <Route path="/" element={<PhotoGrid />} />
         <Route path="/photo/:id" element={<PhotoDetail />} />
